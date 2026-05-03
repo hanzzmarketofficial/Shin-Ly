@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Shin' Ly | Premium Digital Services</title>
+  <!-- Font Awesome 6 (free cdn) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Poppins & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #f4f7fc 0%, #eef2f5 100%);
+      font-family: 'Inter', sans-serif;
+      color: #1e2a3e;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+    }
+
+    /* Container utama */
+    .app-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header keren */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .brand-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #0b3954, #2c7da0, #5f9ea7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .brand-header p {
+      color: #4b6b7e;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(44, 125, 160, 0.1);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1f6392;
+      margin-top: 0.8rem;
+    }
+
+    /* 3 Opsi utama (card pilihan) */
+    .options-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+    .option-card {
+      background: white;
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .option-card i {
+      font-size: 2.8rem;
+      color: #2c7da0;
+      margin-bottom: 0.7rem;
+    }
+    .option-card h3 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #1e2f3c;
+    }
+    .option-card p {
+      color: #5c7e91;
+      font-weight: 500;
+    }
+    .option-card.active {
+      background: white;
+      border: 2px solid #2c7da0;
+      box-shadow: 0 20px 30px -12px rgba(44,125,160,0.3);
+      transform: scale(1.02);
+    }
+    .option-card:hover:not(.inactive-style) {
+      transform: translateY(-6px);
+      background: #ffffff;
+      border-color: #bdd9e7;
+      box-shadow: 0 24px 36px -14px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Panel konten (area dinamis) */
+    .content-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(0px);
+      border-radius: 2rem;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255,255,255,0.8);
+      transition: all 0.2s ease;
+    }
+
+    /* Marketplace grid produk */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.5rem;
+    }
+    .product-item {
+      background: #fbfefe;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      border: 1px solid #e2edf2;
+      transition: 0.2s;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02);
+    }
+    .product-item:hover {
+      border-color: #6ea8bd;
+      transform: translateY(-4px);
+      background: white;
+      box-shadow: 0 20px 25px -12px rgba(47, 109, 128, 0.2);
+    }
+    .product-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1c506b;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .product-desc {
+      color: #547484;
+      margin-bottom: 0.9rem;
+      font-size: 0.9rem;
+    }
+    .product-price {
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #0b4f6c;
+      background: #e9f2f6;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      letter-spacing: -0.3px;
+    }
+    .wa-badge {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #2f835e;
+      font-weight: 500;
+    }
+
+    /* Payment area (opsi 2) */
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 1.2rem;
+    }
+    .method-card {
+      background: #f9fbfd;
+      border-radius: 1.8rem;
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      border: 1px solid #dce9f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .method-icon {
+      font-size: 2.4rem;
+      width: 60px;
+      text-align: center;
+    }
+    .method-info {
+      flex: 1;
+    }
+    .method-info h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1e4a62;
+    }
+    .method-info p {
+      font-size: 1.1rem;
+      font-weight: 500;
+      font-family: monospace;
+      background: #eef3f7;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-top: 6px;
+    }
+    .qr-img {
+      max-width: 140px;
+      border-radius: 1.2rem;
+      border: 2px solid #cbdbe2;
+      background: white;
+      padding: 6px;
+    }
+    .copy-btn {
+      background: #eef2f5;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #2c7da0;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: #d4e2ec;
+    }
+
+    /* Social Media (opsi 3) */
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin-top: 1rem;
+    }
+    .social-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1rem 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+      border: 1px solid #e0edf3;
+      box-shadow: 0 6px 12px -8px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+    .social-icon {
+      font-size: 2.6rem;
+      width: 70px;
+      text-align: center;
+    }
+    .social-detail h3 {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    .social-detail p {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #2f647e;
+      background: #eef2f8;
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+      display: inline-block;
+    }
+    .social-card a {
+      text-decoration: none;
+      background: #1f6392;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .social-card a:hover {
+      background: #0b4f6c;
+    }
+
+    /* Footer sederhana */
+    .footer-note {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      color: #6a8c9c;
+    }
+
+    @media (max-width: 750px) {
+      body { padding: 1rem; }
+      .option-card h3 { font-size: 1.3rem; }
+      .product-title { font-size: 1.2rem; }
+      .method-card { flex-direction: column; align-items: flex-start; }
+    }
+    button {
+      background: none;
+      border: none;
+    }
+    .warning-text {
+      font-size: 0.8rem;
+      color: #ba8b2c;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+<div class="app-container">
+  <div class="brand-header">
+    <h1>✨ Shin' Ly ✨</h1>
+    <p>AI-powered digital solutions · premium & effortless</p>
+    <div class="badge"><i class="fas fa-bolt"></i> next-gen services</div>
+  </div>
+
+  <!-- 3 OPSI UTAMA -->
+  <div class="options-row">
+    <div class="option-card" data-opt="marketplace">
+      <i class="fas fa-store"></i>
+      <h3>MarketPlace</h3>
+      <p>Jasa & produk eksklusif</p>
+    </div>
+    <div class="option-card" data-opt="payment">
+      <i class="fas fa-credit-card"></i>
+      <h3>Payment</h3>
+      <p>Bayar mudah & terpercaya</p>
+    </div>
+    <div class="option-card" data-opt="social">
+      <i class="fas fa-hashtag"></i>
+      <h3>Social Media</h3>
+      <p>Ikuti kami</p>
+    </div>
+  </div>
+
+  <!-- Dynamic content panel -->
+  <div class="content-panel" id="dynamicPanel">
+    <!-- default akan diisi marketplace via js -->
+    <div style="text-align: center; padding: 2rem;">Memuat layanan Shin' Ly ...</div>
+  </div>
+  <div class="footer-note">
+    <i class="fas fa-shield-alt"></i>  fast response · transaksi aman
+  </div>
+</div>
+
+<script>
+  // Data produk marketplace (sesuai permintaan)
+  const marketplaceProducts = [
+    {
+      id: "gmail_fresh",
+      title: "📧 JASA JUAL GMAIL FRESH",
+      desc: "Akun Gmail baru, siap pakai, aman & original.",
+      price: "Rp2.000 / Gmail",
+      detailPrice: "Rp2.000 per akun"
+    },
+    {
+      id: "logo_design",
+      title: "🎨 JASA DESAIN LOGO",
+      desc: "Desain profesional, modern, sesuai branding.",
+      price: "Rp1.000 / Logo",
+      detailPrice: "Mulai Rp1.000 per logo"
+    },
+    {
+      id: "topup_games",
+      title: "🎮 JASA TOP UP ALL GAMES",
+      desc: "Free Fire, Mobile Legends, PUBG, Valorant, dll.",
+      price: "Harga kompetitif",
+      detailPrice: "Top Up semua game terlaris"
+    },
+    {
+      id: "nokos_negara",
+      title: "🌏 NOKOS ALL NEGARA",
+      desc: "Nomor kosong (virtual) berbagai negara. Siap pakai.",
+      price: "Mulai call/chat",
+      detailPrice: "Info harga via WhatsApp"
+    }
+  ];
+
+  // Data Payment (sesuai permintaan)
+  const paymentData = {
+    dana: "081973753505",
+    gopay: "081973753505",
+    qrisImg: "https://imgur.com/a/TVzeBYz"   // imgur album, tapi kita akan embed gambar dari imgur link biasa? karena itu merupakan album, namun user minta tampilkan qris. Kita bisa mengambil gambar langsung dari imgur? Url yg diberikan album. Agar optimal, kita gunakan iframe preview? tidak etis. Tapi sesuai permintaan: "Qris:https://imgur.com/a/TVzeBYz", akan kita tampilkan embed imgur album card.
+  };
+
+  // fungsi redirect ke WhatsApp (nomor push)
+  const whatsappTargetNumber = "https://wa.me/qr/PYO4EPHW73YID1"; // dari QR? tetapi kita konversi menjadi link wa.me dengan nomor? Tapi yg diberikan: https://wa.me/qr/PYO4EPHW73YID1 -> itu adalah link QR code WhatsApp. Bisa langsung redirect.
+  // Saat produk diklik, buka tautan tersebut (link resmi WA)
+  function redirectToWhatsApp() {
+    window.open(whatsappTargetNumber, "_blank");
+  }
+
+  // Marketplace render
+  function renderMarketplace() {
+    const container = document.getElementById('dynamicPanel');
+    if (!container) return;
+    let productsHtml = `<div><h2 style="font-size: 1.7rem; margin-bottom: 0.5rem; display: flex; gap: 8px;"><i class="fas fa-cubes" style="color:#2c7da0;"></i>✨ Katalog Shin' Ly ✨</h2><p style="color:#41748e; margin-bottom: 1rem;">Klik produk untuk order via WhatsApp official</p><div class="products-grid">`;
+    marketplaceProducts.forEach(prod => {
+      productsHtml += `
+        <div class="product-item" data-product="${prod.id}">
+          <div class="product-title">${prod.title}</div>
+          <div class="product-desc">${prod.desc}</div>
+          <div class="product-price">${prod.price}</div>
+          <div class="wa-badge"><i class="fab fa-whatsapp"></i> Klik → langsung chat</div>
+        </div>
+      `;
+    });
+    productsHtml += `</div><div class="warning-text"><i class="fas fa-info-circle"></i> Semua layanan tersedia. Setelah klik, Anda akan diarahkan ke WhatsApp resmi Shin' Ly.</div>`;
+    container.innerHTML = productsHtml;
+
+    // attach event ke semua product-item
+    document.querySelectorAll('.product-item').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        redirectToWhatsApp();
+      });
+    });
+  }
+
+  // Render Payment opsi 2 (abu-abu putih, desain cantik)
+  function renderPayment() {
+    const container = document.getElementById('dynamicPanel');
+    // membuat tampilan pembayaran dengan Dana, Gopay, QRIS
+    const qrisUrl = "https://imgur.com/a/TVzeBYz"; // album, tapi kita tampilkan kotak dengan tombol lihat
+    // karena imgur album agak tricky untuk diembed langsung, kita buat area preview dengan link.
+    container.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 1rem;">
+        <h2 style="font-size: 1.8rem; color:#1e4f6a;"><i class="fas fa-credit-card"></i> Metode Pembayaran</h2>
+        <span style="background:#eef2f5; padding: 6px 14px; border-radius: 30px;">Aman & cepat</span>
+      </div>
+      <div class="payment-methods">
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-building-columns" style="color:#0077b6;"></i></div>
+          <div class="method-info">
+            <h4>🏦 Dana</h4>
+            <p id="danaNumber">081973753505</p>
+            <button class="copy-btn" data-copy="danaNumber">Salin Nomor</button>
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fab fa-google-pay" style="color:#148566;"></i></div>
+          <div class="method-info">
+            <h4>💚 GoPay</h4>
+            <p id="gopayNumber">081973753505</p>
+            <button class="copy-btn" data-copy="gopayNumber">Salin Nomor</button>
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-icon"><i class="fas fa-qrcode" style="color:#2a6d8f;"></i></div>
+          <div class="method-info">
+            <h4>📱 QRIS (Scan via Dana/Gopay/OVO)</h4>
+            <p>QRIS Shin' Ly - bayar instan</p>
+            <a href="${qrisUrl}" target="_blank" style="display:inline-block; margin-top: 6px; background:#1f6392; color:white; padding:6px 20px; border-radius: 40px; text-decoration:none; font-weight:600;">🖼️ Lihat QRIS (Imgur)</a>
+            <div style="margin-top: 10px; font-size:0.75rem; color:#5f8b9e;">Klik tombol untuk melihat gambar QR Code</div>
+          </div>
+          <!-- optional tampilkan mini preview? karena imgur album, lebih baik direct link -->
+        </div>
+      </div>
+      <div style="margin-top: 1.2rem; background:#f2f6f9; border-radius: 1.2rem; padding: 1rem; text-align: center; border:1px solid #dcecf5">
+        <i class="fas fa-lock"></i>  Transfer sesuai nominal | Konfirmasi via WhatsApp
+      </div>
+    `;
+
+    // fungsi copy teks
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const targetId = btn.getAttribute('data-copy');
+        if (targetId) {
+          const textEl = document.getElementById(targetId);
+          if (textEl) {
+            const textToCopy = textEl.innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              const originalText = btn.innerText;
+              btn.innerText = "Tersalin! ✅";
+              setTimeout(() => {
+                btn.innerText = originalText;
+              }, 1500);
+            }).catch(() => alert("Gagal menyalin, silakan salin manual"));
+          }
+        }
+      });
+    });
+  }
+
+  // Render Social Media (Opsi 3)
+  function renderSocialMedia() {
+    const container = document.getElementById('dynamicPanel');
+    container.innerHTML = `
+      <div style="margin-bottom: 1.2rem;">
+        <h2 style="font-size: 1.8rem; color:#1e4f6a;"><i class="fas fa-share-alt"></i>  Sosial Media Shin' Ly</h2>
+        <p style="color:#497e98;">Ikuti & hubungi kami untuk info terbaru</p>
+      </div>
+      <div class="social-links">
+        <div class="social-card">
+          <div class="social-icon"><i class="fab fa-tiktok" style="color:#010101; text-shadow: 0 1px 2px #69c;"></i></div>
+          <div class="social-detail">
+            <h3>TikTok</h3>
+            <p>@cmiw536</p>
+          </div>
+          <a href="https://www.tiktok.com/@cmiw536" target="_blank"><i class="fab fa-tiktok"></i> Kunjungi</a>
+        </div>
+        <div class="social-card">
+          <div class="social-icon"><i class="fab fa-whatsapp" style="color:#25D366;"></i></div>
+          <div class="social-detail">
+            <h3>WhatsApp</h3>
+            <p>+62 888-1926-324</p>
+          </div>
+          <a href="https://wa.me/628881926324" target="_blank"><i class="fab fa-whatsapp"></i> Chat Sekarang</a>
+        </div>
+        <div class="social-card">
+          <div class="social-icon"><i class="fas fa-globe"></i></div>
+          <div class="social-detail">
+            <h3>Website Official</h3>
+            <p>Shin' Ly Ecosystem</p>
+          </div>
+          <a href="#" style="background:#628b9c; cursor:default;">Coming soon</a>
+        </div>
+      </div>
+      <div class="warning-text" style="margin-top:1rem;"><i class="fas fa-comment-dots"></i> Respon cepat via WhatsApp & TikTok DM</div>
+    `;
+  }
+
+  // Variable untuk melacak opsi aktif
+  let currentOption = "marketplace";
+
+  // Fungsi untuk mengupdate tampilan berdasarkan opsi
+  function setActiveOption(option) {
+    currentOption = option;
+    // update tampilan card active
+    const cards = document.querySelectorAll('.option-card');
+    cards.forEach(card => {
+      const optVal = card.getAttribute('data-opt');
+      if (optVal === option) {
+        card.classList.add('active');
+      } else {
+        card.classList.remove('active');
+      }
+    });
+    // render konten
+    if (option === 'marketplace') {
+      renderMarketplace();
+    } else if (option === 'payment') {
+      renderPayment();
+    } else if (option === 'social') {
+      renderSocialMedia();
+    }
+  }
+
+  // Event listener untuk masing-masing tombol opsi
+  document.querySelectorAll('.option-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const opt = card.getAttribute('data-opt');
+      if (opt === 'marketplace') setActiveOption('marketplace');
+      else if (opt === 'payment') setActiveOption('payment');
+      else if (opt === 'social') setActiveOption('social');
+    });
+  });
+
+  // inisialisasi pertama kali: marketplace (opsi 1)
+  setActiveOption('marketplace');
+
+  // tambahan: jika ingin memastikan bahwa semua produk akan membuka link WhatsApp yang sudah ditentukan (sudah di handle di renderMarketplace)
+  // untuk tambahan interaksi pada payment / sosial media tidak mengganggu.
+  // juga untuk opsi social media, mengikuti permintaan menampilkan tiktok & whatsapp.
+  // Note: pada produk "NOKOS ALL NEGARA" dan topup games tetap redirect ke WA yang sama via nomor QR. 
+  // semua sesuai keinginan: "Ketika Salah Satu Produk di Pencet Akan Masuk ke Nomor WhatsApp ini https://wa.me/qr/PYO4EPHW73YID1"
+  // done.
+</script>
+</body>
+</html>
